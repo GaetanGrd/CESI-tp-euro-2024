@@ -1,7 +1,7 @@
 import {shuffle} from "lodash";
 import {Team} from "./Class/teams";
 import {Group} from "./Class/groups";
-import { group } from "console";
+import {Match} from "./Class/match";
 
 // divise l'ensemble des équipes hors playoff + les équipes qualifiées en 6 groupe et renvoie le tableaux des groupes (1 équipe de chaque chapeau)
 const setRandomGroup = (): Group[] => {
@@ -40,5 +40,27 @@ const getWinner = (teams: Team[], playoffgrp: string): Team => {
     return playoffTeams[Math.floor(Math.random() * playoffTeams.length)];
 };
 
+// Simuler un match entre 2 équipes (1 victoire = 3 points, 1 nul = 1 point, 1 défaite = 0 point)
+const simulateMatch = (type: string, local: Team, visitor: Team): Match => {
+    const scoreLocal = Math.floor(Math.random() * 5);
+    const scoreVisitor = Math.floor(Math.random() * 5);
 
-console.log(setRandomGroup());
+    return new Match(type, local, scoreLocal, visitor, scoreVisitor);
+
+};
+
+// Simuler tous les matchs d'un groupe
+const simulatePool = (group: Group): Match[] => {
+    const matches = [];
+
+    for (let i = 0; i < group.teams.length; i++) {
+        for (let j = i + 1; j < group.teams.length; j++) {
+            matches.push(simulateMatch("group", group.teams[i], group.teams[j]));
+        }
+    }
+
+    return matches;
+}
+
+
+
