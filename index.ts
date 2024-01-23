@@ -11,7 +11,7 @@ const setRandomGroup = (): Group[] => {
     const allTeams = [...playoffTeams, ...teams];
 
     // On mélange les équipes de chaque chapeau
-    const shuffledHats = [1, 2, 3, 4].map(hatNumber => 
+    const shuffledHats = [1, 2, 3, 4].map(hatNumber =>
         shuffle(allTeams.filter(team => team.hat === hatNumber.toString()))
     );
 
