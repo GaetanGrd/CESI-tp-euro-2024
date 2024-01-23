@@ -1,5 +1,5 @@
-// export de la class TEAM (Devellopement fonctionnel)
 // readOnly
+
 import {Team} from "./teams";
 import {Match} from "./match";
 

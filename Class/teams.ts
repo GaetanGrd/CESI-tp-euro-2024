@@ -1,4 +1,3 @@
-// export de la class TEAM (Devellopement fonctionnel)
 // readOnly
 import fs from "fs";
 

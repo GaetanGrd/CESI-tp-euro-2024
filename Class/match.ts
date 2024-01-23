@@ -1,17 +1,14 @@
-// export de la class match (Devellopement fonctionnel)
 
 import fs from "fs";
 import { Team } from "./teams";
 
 export class Match {
-    type: string;
     local: Team;
     scoreLocal: number;
     visitor: Team;
     scoreVisitor: number;
 
-    constructor(type: string, local: Team, scoreLocal: number, visitor: Team, scoreVisitor: number) {
-        this.type = type;
+    constructor(local: Team, scoreLocal: number, visitor: Team, scoreVisitor: number) {
         this.local = local;
         this.scoreLocal = scoreLocal;
         this.visitor = visitor;

@@ -45,7 +45,7 @@ const simulateMatch = (type: string, local: Team, visitor: Team): Match => {
     const scoreLocal = Math.floor(Math.random() * 5);
     const scoreVisitor = Math.floor(Math.random() * 5);
 
-    return new Match(type, local, scoreLocal, visitor, scoreVisitor);
+    return new Match(local, scoreLocal, visitor, scoreVisitor);
 
 };
 
@@ -117,6 +117,8 @@ const getRanking = (group: Group): [Team, number][] => {
     });
     return ranking;
 }
+
+// 
 
 const groups = setRandomGroup();
 for (const group of groups) {
