@@ -22,8 +22,7 @@ export class Team {
     }
 
     public static getTeams(): Team[] {
-        const raw = fs.readFileSync("./Data/countries.json", "utf8");
-        const teams = JSON.parse(raw);
-        return teams;
+        const rawTeams = fs.readFileSync("./Data/countries.json", "utf8");
+        return JSON.parse(rawTeams);
     }
 }

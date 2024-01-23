@@ -1,6 +1,7 @@
 // export de la class TEAM (Devellopement fonctionnel)
 // readOnly
-import { Team } from "./teams";
+import {Team} from "./teams";
+import fs from "fs";
 
 export	class Group {
     no: number;
@@ -12,6 +13,4 @@ export	class Group {
         this.no = no;
         this.teams = teams;
     }
-
-
 }
