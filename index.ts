@@ -27,14 +27,6 @@ const setRandomGroup = (): Group[] => {
         return new Group(index + 1, hats);
     });
 
-    // on affiche les groupes dans la console
-    console.log(groups[0].teams);
-    console.log(groups[1].teams);
-    console.log(groups[2].teams);
-    console.log(groups[3].teams);
-    console.log(groups[4].teams);
-    console.log(groups[5].teams);
-
     // On renvoie les groupes
     return groups;
 };
