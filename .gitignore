@@ -1,0 +1,36 @@
+# Dépendances
+/node_modules
+
+# Fichiers de build
+/dist
+/build
+
+# Fichiers de journalisation
+*.log
+npm-debug.log*
+
+# Fichiers de l'environnement de développement
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Fichiers et dossiers de l'éditeur
+/.vscode
+/.idea
+/*.sublime-workspace
+
+# Fichiers de cache
+.cache
+.parcel-cache
+
+# Fichiers temporaires
+/tmp
+/temp
+
+# Fichiers générés par TypeScript
+*.tsbuildinfo
+
+# Fichiers de couverture de tests
+/coverage
