@@ -41,9 +41,9 @@ const getWinner = (teams: Team[], playoffgrp: string): Team => {
 };
 
 // Simuler un match entre 2 équipes (1 victoire = 3 points, 1 nul = 1 point, 1 défaite = 0 point)
-const simulateMatch = (type: string, local: Team, visitor: Team): Match => {
-    const scoreLocal = Math.floor(Math.random() * 5);
-    const scoreVisitor = Math.floor(Math.random() * 5);
+const simulateMatch = ( local: Team, visitor: Team): Match => {
+    const scoreLocal = Math.floor(Math.random() * 50);
+    const scoreVisitor = Math.floor(Math.random() * 50);
 
     return new Match(local, scoreLocal, visitor, scoreVisitor);
 
@@ -55,7 +55,7 @@ const simulateMatch = (type: string, local: Team, visitor: Team): Match => {
 const simulatePool = (group: Group) => {
     const teams = group.teams;
     const generateMatches = (team: Team, index: number) =>
-        teams.slice(index + 1).map(otherTeam => simulateMatch("group", team, otherTeam));
+        teams.slice(index + 1).map(otherTeam => simulateMatch( team, otherTeam));
 
     return teams.flatMap((team, index) => generateMatches(team, index));
 };
@@ -118,8 +118,76 @@ const getRanking = (group: Group): [Team, number][] => {
     return ranking;
 }
 
-// 
+// renvoyer les équipes qualifiées pour le tournois à élimination directe
+const getQualifiedTeams = (groups: Group[]): Team[] => {
+    const qualifiedTeams = groups.flatMap(group => group.poolRanking.slice(0, 2));
+    const thirdTeams = groups.flatMap(group => group.poolRanking.slice(2, 3));
 
+    const thirdTeamsSorted = thirdTeams.sort((a, b) => b[1] - a[1]);
+
+    return [...qualifiedTeams, ...thirdTeamsSorted.slice(0, 4)].map(team => team[0]);
+};
+
+// retourner les équipes gagnantes d'un ensemble de matchs
+const getWinners = (matches: Match[]): Team[] => {
+    return matches.map(match => match.scoreLocal > match.scoreVisitor ? match.local : match.visitor);
+};
+
+// tirage au sort des matchs du tour préliminaire
+const getRoundOf16Matches = (qualifiedTeams: Team[]): Match[] => {
+    const shuffledTeams = shuffle(qualifiedTeams);
+    const matches = [];
+
+    for (let i = 0; i < shuffledTeams.length; i += 2) {
+        matches.push(simulateMatch(shuffledTeams[i], shuffledTeams[i + 1]));
+    }
+
+    return matches;
+};
+
+// quart de finale : 8 équipes index 1 vs 2 index 3 vs 4 etc...
+const getQuarterFinalMatches = (roundOf16Match : Team[]): Match[] => {
+    const matches = [];
+
+    for (let i = 0; i < roundOf16Match.length; i += 2) {
+        matches.push(simulateMatch(roundOf16Match[i], roundOf16Match[i + 1]));
+    }
+
+    return matches;
+}
+
+
+
+// demi finale : 4 équipes index 1 vs 2 index 3 vs 4
+const getSemiFinalMatches = (quarterFinalMatches: Team[]): Match[] => {
+    const matches = [];
+
+    for (let i = 0; i < quarterFinalMatches.length; i += 2) {
+        matches.push(simulateMatch(quarterFinalMatches[i], quarterFinalMatches[i + 1]));
+    }
+
+    return matches;
+};
+
+// finale : 2 équipes index 1 vs 2
+const getFinalMatch = (semiFinalWinners: Team[]): Match => {
+    return simulateMatch(semiFinalWinners[0], semiFinalWinners[1]);
+};
+
+// petite finale : 2 équipes perdantes des demi finales
+const getThirdPlaceMatch = (semiFinalLosers: Team[]): Match => {
+    return simulateMatch(semiFinalLosers[0], semiFinalLosers[1]);
+};
+
+
+
+
+
+
+
+
+
+// truc pour afficher lol
 const groups = setRandomGroup();
 for (const group of groups) {
     group.poolMatches = simulatePool(group);
@@ -132,7 +200,71 @@ for (const group of groups) {
 for (let i = 0; i < 100; i++) {
     console.log(" ");
 }
-console.log("résultat");
-console.log(groups);
+
+console.log("Equipes qualifiées pour les playoffs : ");
+console.log(getPlayoffWinners().map(team => team.name + " " + team.playoff));
+console.log(" ");
+
+console.log("Liste des groupes : ");
+console.log(groups.map(group => group.no + " : " + group.teams.map(team => team.name)));
+console.log(" ");
+
+console.log("Matchs de poule : ");
+console.log(groups.map(group => group.poolMatches.map(match => match.local.name + " " + match.scoreLocal + " - " + match.scoreVisitor + " " + match.visitor.name)));
+console.log(" ");
+
+console.log("Classement des groupes : ");
+console.log(groups.map(group => group.poolRanking.map(team => team[0].name + " " + team[1])));
+console.log(" ");
+
+const qualifiedTeams = getQualifiedTeams(groups);
+console.log("Equipes qualifiées pour le tournois à élimination directe : ");
+console.log(qualifiedTeams.map(team => team.name));
+console.log(" ");
+
+const roundOf16Matches = getRoundOf16Matches(qualifiedTeams);
+console.log("Matchs du tour préliminaire : ");
+console.log(roundOf16Matches.map(match => match.local.name + " " + match.scoreLocal + " - " + match.scoreVisitor + " " + match.visitor.name));
+console.log(" ");
+
+const roundOf16Winners = getWinners(roundOf16Matches);
+console.log("Equipes qualifiées pour les quarts de finale : ");
+console.log(roundOf16Winners.map(team => team.name));
+
+const quarterFinalMatches = getQuarterFinalMatches(roundOf16Winners);
+console.log("Matchs des quarts de finale : ");
+console.log(quarterFinalMatches.map(match => match.local.name + " " + match.scoreLocal + " - " + match.scoreVisitor + " " + match.visitor.name));
+console.log(" ");
+
+const quarterFinalWinners = getWinners(quarterFinalMatches);
+console.log("Equipes qualifiées pour les demi finales : ");
+console.log(quarterFinalWinners.map(team => team.name));
+console.log(" ");
+
+const semiFinalMatches = getSemiFinalMatches(quarterFinalWinners);
+console.log("Matchs des demi finales : ");
+console.log(semiFinalMatches.map(match => match.local.name + " " + match.scoreLocal + " - " + match.scoreVisitor + " " + match.visitor.name));
+console.log(" ");
+
+const semiFinalWinners = getWinners(semiFinalMatches);
+console.log("Equipes qualifiées pour la finale : ");
+console.log(semiFinalWinners.map(team => team.name));
+console.log(" ");
+
+const finalMatch = getFinalMatch(semiFinalWinners);
+console.log("Match de la finale : ");
+console.log(finalMatch.local.name + " " + finalMatch.scoreLocal + " - " + finalMatch.scoreVisitor + " " + finalMatch.visitor.name);
+console.log(" ");
+
+const thirdPlaceMatch = getThirdPlaceMatch(semiFinalWinners);
+console.log("Match de la petite finale : ");
+console.log(thirdPlaceMatch.local.name + " " + thirdPlaceMatch.scoreLocal + " - " + thirdPlaceMatch.scoreVisitor + " " + thirdPlaceMatch.visitor.name);
+console.log(" ");
+
+
+
+
+
+
 
 

@@ -1,5 +1,5 @@
-import { Team } from './Team';
-import { Match } from './Match';
+import { Team } from './teams';
+import { Match } from './match';
 
 export class Tournament {
     teams: Team[];
@@ -14,8 +14,9 @@ export class Tournament {
         this.roundOf16Matches = [];
         this.quarterFinalMatches = [];
         this.semiFinalMatches = [];
-        this.finalMatch = new Match(null, 0, null, 0);
-        this.thirdPlaceMatch = new Match( null, 0, null, 0);
+        this.finalMatch = new Match(new Team("","","",0,"",""),0,new Team("","","",0,"",""),0);
+        this.thirdPlaceMatch = new Match(new Team("","","",0,"",""),0,new Team("","","",0,"",""),0);
     }
+}
 
 
