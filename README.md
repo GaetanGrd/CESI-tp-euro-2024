@@ -1,5 +1,5 @@
 # Executer le script 
 ```
+npm i
 ts-node index.ts
 ```
-faut ptet npm i aussi x)
