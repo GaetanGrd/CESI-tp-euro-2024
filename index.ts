@@ -49,18 +49,16 @@ const simulateMatch = (type: string, local: Team, visitor: Team): Match => {
 
 };
 
+
+
 // Simuler tous les matchs d'un groupe
-const simulatePool = (group: Group): Match[] => {
-    const matches = [];
+const simulatePool = (group: Group) => {
+    const teams = group.teams;
+    const generateMatches = (team: Team, index: number) =>
+        teams.slice(index + 1).map(otherTeam => simulateMatch("group", team, otherTeam));
 
-    for (let i = 0; i < group.teams.length; i++) {
-        for (let j = i + 1; j < group.teams.length; j++) {
-            matches.push(simulateMatch("group", group.teams[i], group.teams[j]));
-        }
-    }
-
-    return matches;
-}
+    return teams.flatMap((team, index) => generateMatches(team, index));
+};
 
 // calculer le classement d'un groupe en fonction des points
 // 1 victoire = 3 points, 1 nul = 1 point, 1 défaite = 0 point
@@ -119,7 +117,6 @@ const getRanking = (group: Group): [Team, number][] => {
     });
     return ranking;
 }
-
 
 const groups = setRandomGroup();
 for (const group of groups) {
