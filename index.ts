@@ -49,8 +49,6 @@ const simulateMatch = ( local: Team, visitor: Team): Match => {
 
 };
 
-
-
 // Simuler tous les matchs d'un groupe
 const simulatePool = (group: Group) => {
     const teams = group.teams;
