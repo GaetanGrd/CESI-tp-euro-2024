@@ -1,6 +1,7 @@
 import {shuffle} from "lodash";
 import {Team} from "./Class/teams";
 import {Group} from "./Class/groups";
+import { group } from "console";
 
 // divise l'ensemble des équipes hors playoff + les équipes qualifiées en 6 groupe et renvoie le tableaux des groupes (1 équipe de chaque chapeau)
 const setRandomGroup = (): Group[] => {
@@ -9,21 +10,14 @@ const setRandomGroup = (): Group[] => {
 
     const allTeams = [...playoffTeams, ...teams];
 
-    // On recupere la liste des équipe pour chaque chapeau
-    const hat1 = allTeams.filter(team => team.hat === "1");
-    const hat2 = allTeams.filter(team => team.hat === "2");
-    const hat3 = allTeams.filter(team => team.hat === "3");
-    const hat4 = allTeams.filter(team => team.hat === "4");
-
     // On mélange les équipes de chaque chapeau
-    const shuffledHat1 = shuffle(hat1);
-    const shuffledHat2 = shuffle(hat2);
-    const shuffledHat3 = shuffle(hat3);
-    const shuffledHat4 = shuffle(hat4);
+    const shuffledHats = [1, 2, 3, 4].map(hatNumber =>
+        shuffle(allTeams.filter(team => team.hat === hatNumber.toString()))
+    );
 
     // On attribue les équipes à chaque groupe
-    const groups = Array.from({ length: 6 }, (_, index) => {
-        const hats = [shuffledHat1, shuffledHat2, shuffledHat3, shuffledHat4].map(hatArray => hatArray[index]);
+    const groups = Array.from({ length: Group.MAX_GROUP }, (_, index) => {
+        const hats = shuffledHats.map(hatArray => hatArray[index]);
         return new Group(index + 1, hats);
     });
 
@@ -47,5 +41,4 @@ const getWinner = (teams: Team[], playoffgrp: string): Team => {
 };
 
 
-
-console.log(getPlayoffWinners());
+console.log(setRandomGroup());
