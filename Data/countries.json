@@ -5,7 +5,8 @@
      "secondary_color": "#FFFFFF",
      "fifa_ranking": "9",
      "code": "it",
-     "hat": "4"
+     "hat": "4",
+      "playoff": null
     },
     {
      "name": "Germany",
@@ -13,7 +14,8 @@
      "secondary_color": "#18222F",
      "fifa_ranking": "16",
      "code": "de",
-     "hat": "1"
+     "hat": "1",
+      "playoff": null
     },
     {
      "name": "Portugal",
@@ -21,7 +23,8 @@
      "secondary_color": "#2ECDA7",
      "fifa_ranking": "6",
      "code": "pt",
-     "hat": "1"
+     "hat": "1",
+      "playoff": null
     },
     {
      "name": "Spain",
@@ -29,7 +32,8 @@
      "secondary_color": "#FFC23B",
      "fifa_ranking": "8",
      "code": "es",
-     "hat": "1"
+     "hat": "1",
+      "playoff": null
     },
     {
      "name": "Belgium",
@@ -37,7 +41,8 @@
      "secondary_color": "#18222F",
      "fifa_ranking": "5",
      "code": "be",
-     "hat": "1"
+     "hat": "1",
+      "playoff": null
     },
     {
      "name": "England",
@@ -45,7 +50,8 @@
      "secondary_color": "#E35169",
      "fifa_ranking": "4",
      "code": "gb-eng",
-     "hat": "1"
+     "hat": "1",
+      "playoff": null
     },
     {
      "name": "Hungary",
@@ -53,7 +59,8 @@
      "secondary_color": "#2ECDA7",
      "fifa_ranking": "30",
      "code": "hu",
-     "hat": "2"
+     "hat": "2",
+      "playoff": null
     },
     {
      "name": "Turkey",
@@ -61,7 +68,8 @@
      "secondary_color": "#FFFFFF",
      "fifa_ranking": "38",
      "code": "tr",
-     "hat": "2"
+     "hat": "2",
+      "playoff": null
     },
     {
      "name": "Romania",
@@ -69,7 +77,8 @@
      "secondary_color": "#005FFF",
      "fifa_ranking": "48",
      "code": "ro",
-     "hat": "2"
+     "hat": "2",
+      "playoff": null
     },
     {
      "name": "Denmark",
@@ -77,7 +86,8 @@
      "secondary_color": "#FFFFFF",
      "fifa_ranking": "19",
      "code": "dk",
-     "hat": "2"
+     "hat": "2",
+      "playoff": null
     },
     {
      "name": "Albania",
@@ -85,7 +95,8 @@
      "secondary_color": "#18222F",
      "fifa_ranking": "59",
      "code": "al",
-     "hat": "2"
+     "hat": "2",
+      "playoff": null
     },
     {
      "name": "Austria",
@@ -93,7 +104,8 @@
      "secondary_color": "#18222F",
      "fifa_ranking": "25",
      "code": "at",
-     "hat": "2"
+     "hat": "2",
+      "playoff": null
     },
     {
      "name": "Netherlands",
@@ -101,7 +113,8 @@
      "secondary_color": "#FFFFFF",
      "fifa_ranking": "7",
      "code": "nl",
-     "hat": "3"
+     "hat": "3",
+      "playoff": null
     },
     {
      "name": "Scotland",
@@ -109,7 +122,8 @@
      "secondary_color": "#FFFFFF",
      "fifa_ranking": "34",
      "code": "gb-sct",
-     "hat": "3"
+     "hat": "3",
+      "playoff": null
     },
     {
      "name": "Croatia",
@@ -117,7 +131,8 @@
      "secondary_color": "#E35169",
      "fifa_ranking": "10",
      "code": "hr",
-     "hat": "3"
+     "hat": "3",
+      "playoff": null
     },
     {
      "name": "Slovenia",
@@ -125,7 +140,8 @@
      "secondary_color": "#E35169",
      "fifa_ranking": "54",
      "code": "si",
-     "hat": "3"
+     "hat": "3",
+      "playoff": null
     },
     {
      "name": "Slovakia",
@@ -133,7 +149,8 @@
      "secondary_color": "#E35169",
      "fifa_ranking": "50",
      "code": "sk",
-     "hat": "3"
+     "hat": "3",
+      "playoff": null
     },
     {
      "name": "Czech",
@@ -141,7 +158,8 @@
      "secondary_color": "#0051FF",
      "fifa_ranking": "41",
      "code": "cz",
-     "hat": "3"
+     "hat": "3",
+      "playoff": null
     },
     {
      "name": "Serbia",
@@ -149,7 +167,8 @@
      "secondary_color": "#0026FF",
      "fifa_ranking": "29",
      "code": "rs",
-     "hat": "4"
+     "hat": "4",
+      "playoff": null
     },
     {
      "name": "Switzerland",
@@ -157,7 +176,8 @@
      "secondary_color": "#FFFFFF",
      "fifa_ranking": "14",
      "code": "ch",
-     "hat": "4"
+     "hat": "4",
+      "playoff": null
     },
     {
      "name": "Wales",
