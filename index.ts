@@ -22,13 +22,10 @@ const setRandomGroup = (): Group[] => {
     const shuffledHat4 = shuffle(hat4);
 
     // On attribue les équipes à chaque groupe
-    let groups: Array<Group> = [];
-    groups[0] = new Group(1, [shuffledHat1[0], shuffledHat2[0], shuffledHat3[0], shuffledHat4[0]]);
-    groups[1] = new Group(2, [shuffledHat1[1], shuffledHat2[1], shuffledHat3[1], shuffledHat4[1]]);
-    groups[2] = new Group(3, [shuffledHat1[2], shuffledHat2[2], shuffledHat3[2], shuffledHat4[2]]);
-    groups[3] = new Group(4, [shuffledHat1[3], shuffledHat2[3], shuffledHat3[3], shuffledHat4[3]]);
-    groups[4] = new Group(5, [shuffledHat1[4], shuffledHat2[4], shuffledHat3[4], shuffledHat4[4]]);
-    groups[5] = new Group(6, [shuffledHat1[5], shuffledHat2[5], shuffledHat3[5], shuffledHat4[5]]);
+    const groups = Array.from({ length: 6 }, (_, index) => {
+        const hats = [shuffledHat1, shuffledHat2, shuffledHat3, shuffledHat4].map(hatArray => hatArray[index]);
+        return new Group(index + 1, hats);
+    });
 
     // on affiche les groupes dans la console
     console.log(groups[0].teams);
