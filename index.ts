@@ -62,5 +62,78 @@ const simulatePool = (group: Group): Match[] => {
     return matches;
 }
 
+// calculer le classement d'un groupe en fonction des points
+// 1 victoire = 3 points, 1 nul = 1 point, 1 défaite = 0 point
+// si égalité de points, on regarde le goal average
+// si égalité de goal average, on regarde le nombre de buts marqués
+// si égalité de buts marqués, on regarde le nombre de buts encaissés
+// si égalité de buts encaissés, on en tire un au sort
+const getRanking = (group: Group): [Team, number][] => {
+    const ranking = group.teams.map(team => [team, 0] as [Team, number]);
+
+    for (const match of group.poolMatches) {
+        const local = ranking.find(team => team[0].code === match.local.code);
+        const visitor = ranking.find(team => team[0].code === match.visitor.code);
+
+        if (local && visitor) {
+            if (match.scoreLocal > match.scoreVisitor) {
+                local[1] += 3;
+            } else if (match.scoreLocal === match.scoreVisitor) {
+                local[1] += 1;
+                visitor[1] += 1;
+            } else {
+                visitor[1] += 3;
+            }
+        }
+    }
+
+    ranking.sort((a, b) => {
+        if (a[1] > b[1]) {
+            return -1;
+        } else if (a[1] === b[1]) {
+            const local = group.poolMatches.filter(match => match.local.code === a[0].code).reduce((acc, match) => acc + match.scoreLocal, 0);
+            const visitor = group.poolMatches.filter(match => match.visitor.code === a[0].code).reduce((acc, match) => acc + match.scoreVisitor, 0);
+
+            const local2 = group.poolMatches.filter(match => match.local.code === b[0].code).reduce((acc, match) => acc + match.scoreLocal, 0);
+            const visitor2 = group.poolMatches.filter(match => match.visitor.code === b[0].code).reduce((acc, match) => acc + match.scoreVisitor, 0);
+
+            if (local - visitor > local2 - visitor2) {
+                return -1;
+            } else if (local - visitor === local2 - visitor2) {
+                if (local > local2) {
+                    return -1;
+                } else if (local === local2) {
+                    if (visitor - local > visitor2 - local2) {
+                        return -1;
+                    } else if (visitor - local === visitor2 - local2) {
+                        if (visitor > visitor2) {
+                            return -1;
+                        } else if (visitor === visitor2) {
+                            return Math.random() - 0.5;
+                        }
+                    }
+                }
+            }
+        }
+        return 1;
+    });
+    return ranking;
+}
+
+
+const groups = setRandomGroup();
+for (const group of groups) {
+    group.poolMatches = simulatePool(group);
+}
+for (const group of groups) {
+    group.poolRanking = getRanking(group);
+}
+
+
+for (let i = 0; i < 100; i++) {
+    console.log(" ");
+}
+console.log("résultat");
+console.log(groups);
 
 
