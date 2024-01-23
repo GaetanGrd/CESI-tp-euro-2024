@@ -48,3 +48,4 @@ const getWinner = (teams: Team[], playoffgrp: string): Team => {
 
 
 
+console.log(getPlayoffWinners());
