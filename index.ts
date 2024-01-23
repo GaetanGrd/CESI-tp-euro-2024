@@ -30,14 +30,6 @@ const setRandomGroup = (): Group[] => {
     groups[4] = new Group(5, [shuffledHat1[4], shuffledHat2[4], shuffledHat3[4], shuffledHat4[4]]);
     groups[5] = new Group(6, [shuffledHat1[5], shuffledHat2[5], shuffledHat3[5], shuffledHat4[5]]);
 
-    // on affiche les groupes dans la console
-    console.log(groups[0].teams);
-    console.log(groups[1].teams);
-    console.log(groups[2].teams);
-    console.log(groups[3].teams);
-    console.log(groups[4].teams);
-    console.log(groups[5].teams);
-
     // On renvoie les groupes
     return groups;
 };
