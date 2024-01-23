@@ -133,6 +133,10 @@ const getWinners = (matches: Match[]): Team[] => {
     return matches.map(match => match.scoreLocal > match.scoreVisitor ? match.local : match.visitor);
 };
 
+const getloooser = (matches: Match[]): Team[] => {
+    return matches.map(match => match.scoreLocal < match.scoreVisitor ? match.local : match.visitor);
+}
+
 // tirage au sort des matchs du tour préliminaire
 const getRoundOf16Matches = (qualifiedTeams: Team[]): Match[] => {
     const shuffledTeams = shuffle(qualifiedTeams);
@@ -156,8 +160,6 @@ const getQuarterFinalMatches = (roundOf16Match : Team[]): Match[] => {
     return matches;
 }
 
-
-
 // demi finale : 4 équipes index 1 vs 2 index 3 vs 4
 const getSemiFinalMatches = (quarterFinalMatches: Team[]): Match[] => {
     const matches = [];
@@ -178,14 +180,6 @@ const getFinalMatch = (semiFinalWinners: Team[]): Match => {
 const getThirdPlaceMatch = (semiFinalLosers: Team[]): Match => {
     return simulateMatch(semiFinalLosers[0], semiFinalLosers[1]);
 };
-
-
-
-
-
-
-
-
 
 // truc pour afficher lol
 const groups = setRandomGroup();
@@ -256,7 +250,8 @@ console.log("Match de la finale : ");
 console.log(finalMatch.local.name + " " + finalMatch.scoreLocal + " - " + finalMatch.scoreVisitor + " " + finalMatch.visitor.name);
 console.log(" ");
 
-const thirdPlaceMatch = getThirdPlaceMatch(semiFinalWinners);
+const semiFinalLosers = getloooser(semiFinalMatches);
+const thirdPlaceMatch = getThirdPlaceMatch(semiFinalLosers);
 console.log("Match de la petite finale : ");
 console.log(thirdPlaceMatch.local.name + " " + thirdPlaceMatch.scoreLocal + " - " + thirdPlaceMatch.scoreVisitor + " " + thirdPlaceMatch.visitor.name);
 console.log(" ");
