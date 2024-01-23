@@ -252,11 +252,3 @@ const semiFinalLosers = getloooser(semiFinalMatches);
 const thirdPlaceMatch = getThirdPlaceMatch(semiFinalLosers);
 console.log("Match de la petite finale : ");
 console.log(thirdPlaceMatch.local.name + " " + thirdPlaceMatch.scoreLocal + " - " + thirdPlaceMatch.scoreVisitor + " " + thirdPlaceMatch.visitor.name);
-
-
-
-
-
-
-
-
